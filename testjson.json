@@ -1,0 +1,77 @@
+{ 
+  "AWSTemplateFormatVersion": "2010-09-09", 
+  "Description": "zabbix proxy stack", 
+
+  "Parameters": { 
+    "LOB": { 
+      "Description": "Line of Business Monitored", 
+      "Type": "String", 
+      "Default": "techops-e-dev", 
+      "AllowedValues": [ 
+        "techops-e-dev", 
+        "card-e-dev"
+      ] 
+    } 
+  }, 
+
+  "Mappings" : { 
+    "params" : { 
+      "techops-e-dev" : { 
+        "ami" : "ami-a93da8c9",
+        "snapshotId" : "snap-0842afc275cdde631",
+          "Size" : "10",
+          "AZs" : ["us-west-2b","us-west-2b"],
+           "subnets" : "subnet-f5f57283"
+      }, 
+      "card-e-dev" : { 
+        "ami" : "ami-a93da8c9"
+      }
+    }
+  },
+  
+  "Resources": { 
+    "WebServerGroup" : {
+      "Type" : "AWS::AutoScaling::AutoScalingGroup",
+      "Properties" : {
+        "LaunchConfigurationName" : { "Ref" : "ServerLaunchConfig" },
+        "MinSize" : "1",
+        "MaxSize" : "1",
+        "DesiredCapacity": "1",
+        "AvailabilityZones": {
+          "Fn::FindInMap": [
+            "params",
+            {
+              "Ref": "LOB"
+            },
+            "AZs"
+          ]
+        }
+        }
+},  
+    "ServerLaunchConfig": { 
+      "Type": "AWS::AutoScaling::LaunchConfiguration", 
+      "Properties": { 
+        "ImageId": { "Fn::FindInMap" : [ "params", {"Ref":"LOB"}, "ami" ] },
+        "BlockDeviceMappings": [
+          {
+            "DeviceName": "/dev/sdh",
+            "Ebs":  {"SnapshotId":  { "Fn::FindInMap" : [ "params", {"Ref":"LOB"},"snapshotId"] },
+              "DeleteOnTermination": "true",
+              "VolumeSize": {
+                "Fn::FindInMap": [
+                  "params",
+                  {
+                    "Ref": "LOB"
+                  },
+                  "Size"
+                ]
+              },
+              "VolumeType": "gp2" 
+                   } 
+          }
+        ],
+        "InstanceType": "t2.micro"
+      }
+    }
+  }
+}
