@@ -9903,7 +9903,7 @@
                             "EndOfLifeDate": "2017-03-10"
                         }, 
                         {
-                            "AmiId": "ami-40e0ed57", 
+                            "AmiId": "ami-7c803d1c", 
                             "AmiVersion": "16.12-1", 
                             "Architecture": "x86_64", 
                             "VirtualizationType": "hvm", 
