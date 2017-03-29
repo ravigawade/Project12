@@ -1,0 +1,74 @@
+{
+    "ASVZABBIX": {
+        "s3BucketName": "testappbucket1",
+        "asv": "ASVZABBIX",
+        "cft": "https://raw.githubusercontent.com/ravigawade/Project12/master/testjson.json",
+        "amis": {
+            "rhel-6": {
+                "currentAmiId": "Mappings.params.techops-e-dev.ami",
+                "latestAmiLink": "https://raw.githubusercontent.com/ravigawade/Project12/master/rhel7.json",
+                "accountName": "cof-techops-dev",
+                "regionName": "us-east-1"
+            },
+            "rhel-7": {
+
+            },
+            "ubuntu-14": {
+
+            },
+            "ubuntu-16": {
+
+            },
+            "win-08": {
+
+            },
+            "win-12": {
+
+            },
+            "amazon": {
+
+            }
+        },
+        "snapshots": {
+            "snapx1": {
+                "currentSnapId": "Mappings.params.techops-e-dev.snapshotId",
+                "deviceName": "/dev/sdh",
+                "nameForUI": "/dev/sdh",
+                "regionName": "us-east-1"
+            },
+            "snapx2": {
+
+            },
+            "snapx3": {
+
+            },
+            "snapx4": {
+
+            },
+            "snapx5": {
+
+            },
+            "snapx6": {
+
+            },
+            "snapx7": {
+
+            },
+            "snapx8": {
+
+            },
+            "snapx9": {
+
+            },
+            "snapx10": {
+
+            },
+            "snapx11": {
+
+            },
+            "snapx12": {
+
+            }
+        }
+    }
+}
